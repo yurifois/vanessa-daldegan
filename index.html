@@ -31,11 +31,13 @@
       "@id": "https://www.instneurolume.com.br/#instituto",
       "name": "NeuroLume Instituto da Dor e Fisioterapia Regenerativa",
       "url": "https://www.instneurolume.com.br/",
+      "hasMap": "https://maps.app.goo.gl/tJ6nxwLZMhM4G8Je6?g_st=ac",
       "telephone": "+55 61 98571-1936",
       "description": "Atendimento fisioterapêutico individualizado, terapias manuais, reabilitação motora e cuidado da dor crônica no Recanto das Emas/DF.",
       "medicalSpecialty": "https://schema.org/Physiotherapy",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "Quadra 603, Conjunto 7",
         "addressLocality": "Recanto das Emas",
         "addressRegion": "DF",
         "addressCountry": "BR"
@@ -85,7 +87,7 @@
       "name": "Como funciona a primeira consulta?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "O primeiro encontro é dedicado à avaliação fisioterapêutica. A Dra. Vanessa conversa sobre o histórico, as queixas, limitações e objetivos do paciente e explica as possibilidades de cuidado."
+        "text": "O primeiro encontro é dedicado ao mapeamento físico. A Dra. Vanessa conversa sobre o histórico, as queixas, limitações e objetivos do paciente e explica as possibilidades de cuidado."
       }
     },
     {
@@ -109,7 +111,7 @@
       "name": "Quais serviços são oferecidos?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "O NeuroLume oferece terapias manuais, reabilitação motora convencional, reabilitação metabólica e tratamento da dor crônica. A indicação depende da avaliação de cada pessoa."
+        "text": "O NeuroLume oferece terapias manuais, reabilitação motora convencional, reabilitação metabólica e tratamento da dor crônica. A indicação depende do mapeamento físico de cada pessoa."
       }
     }
   ]
@@ -211,6 +213,7 @@ nav {
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(201, 169, 110, 0.15);
   padding: 0 24px;
+  animation: header-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .nav-inner {
   max-width: var(--max-w);
@@ -252,6 +255,27 @@ nav {
 }
 .nav-wa:hover { background: var(--gold-light); }
 .nav-wa svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+.nav-logo,
+.nav-links,
+.nav-cta,
+.nav-hamburger {
+  opacity: 0;
+  transform: translateY(-12px);
+  animation: header-item-enter 0.55s ease forwards;
+}
+.nav-logo { animation-delay: 0.18s; }
+.nav-links { animation-delay: 0.28s; }
+.nav-cta,
+.nav-hamburger { animation-delay: 0.38s; }
+
+@keyframes header-enter {
+  from { opacity: 0; transform: translateY(-18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes header-item-enter {
+  to { opacity: 1; transform: translateY(0); }
+}
 
 /* hamburger */
 .nav-hamburger {
@@ -377,6 +401,25 @@ nav {
 .hero-image-wrap {
   position: relative;
   display: flex; justify-content: center;
+}
+
+.hero-content > *,
+.hero-image-wrap {
+  opacity: 0;
+  transform: translateY(28px);
+  animation: hero-item-enter 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-content > :nth-child(1) { animation-delay: 0.35s; }
+.hero-content > :nth-child(2) { animation-delay: 0.45s; }
+.hero-content > :nth-child(3) { animation-delay: 0.55s; }
+.hero-content > :nth-child(4) { animation-delay: 0.65s; }
+.hero-content > :nth-child(5) { animation-delay: 0.75s; }
+.hero-image-wrap {
+  transform: translateX(32px);
+  animation-delay: 0.5s;
+}
+@keyframes hero-item-enter {
+  to { opacity: 1; transform: translate(0, 0); }
 }
 .hero-img-border {
   position: absolute;
@@ -935,12 +978,101 @@ nav {
   overflow: hidden;
   transition: max-height 0.35s ease, padding 0.35s ease;
 }
-.faq-item.open .faq-answer { max-height: 400px; padding-bottom: 24px; }
+.faq-item.open .faq-answer { max-height: 1100px; padding-bottom: 24px; }
 .faq-answer p {
   font-size: 0.9375rem;
   line-height: 1.75;
   color: var(--text-mid);
   font-weight: 300;
+}
+.faq-service-groups {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-top: 4px;
+}
+.faq-service-group h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+.faq-service-group ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.faq-service-group li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-mid);
+  font-weight: 300;
+}
+.faq-service-group li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.faq-service-note { margin-top: 20px; }
+
+/* ── MAPA ────────────────────────────────────────────────── */
+#mapa {
+  background: var(--cream);
+  padding: 100px 24px;
+}
+.map-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 56px;
+  align-items: center;
+}
+.map-copy .body-text { margin-bottom: 28px; }
+.map-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.map-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: var(--text-mid);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+.map-detail::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  margin-top: 0.45em;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.map-frame {
+  min-height: 430px;
+  border: 1px solid var(--cream-dark);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--white);
+}
+.map-frame iframe {
+  display: block;
+  width: 100%;
+  height: 430px;
+  border: 0;
 }
 
 /* ── CTA FINAL ───────────────────────────────────────────── */
@@ -1134,6 +1266,9 @@ footer {
   .conditions-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonials-grid { grid-template-columns: 1fr; }
   .methods-grid { grid-template-columns: 1fr; }
+  .faq-service-groups { grid-template-columns: 1fr; gap: 20px; }
+  .map-inner { grid-template-columns: 1fr; gap: 40px; }
+  .map-frame, .map-frame iframe { min-height: 340px; height: 340px; }
   .process-steps {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1141,6 +1276,21 @@ footer {
   .process-steps::before { display: none; }
   .footer-inner { grid-template-columns: 1fr; gap: 36px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  nav,
+  .nav-logo,
+  .nav-links,
+  .nav-cta,
+  .nav-hamburger,
+  .hero-content > *,
+  .hero-image-wrap,
+  .reveal {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 @media (max-width: 480px) {
   .conditions-grid { grid-template-columns: 1fr; }
@@ -1153,7 +1303,7 @@ footer {
 <body>
 
 <!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/5561985711936?text=Ol%C3%A1%2C+vim+pelo+site+e+gostaria+de+agendar+uma+avalia%C3%A7%C3%A3o." 
+<a href="https://wa.me/5561985711936?text=Ol%C3%A1%2C+vim+pelo+site+e+gostaria+de+agendar+meu+mapeamento+f%C3%ADsico."
    class="float-wa" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
@@ -1174,7 +1324,7 @@ footer {
       <a href="#faq">FAQ</a>
     </div>
     <div class="nav-cta">
-      <a href="https://wa.me/5561985711936?text=Ol%C3%A1%2C+vim+pelo+site+e+gostaria+de+agendar+uma+avalia%C3%A7%C3%A3o." 
+      <a href="https://wa.me/5561985711936?text=Ol%C3%A1%2C+vim+pelo+site+e+gostaria+de+agendar+meu+mapeamento+f%C3%ADsico."
          class="nav-wa" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.107.546 4.09 1.502 5.813L0 24l6.341-1.484A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.032-1.38l-.361-.214-3.763.881.916-3.658-.235-.375A9.807 9.807 0 012.182 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
         Agendar agora
@@ -1192,7 +1342,7 @@ footer {
   <a href="#indicacoes" onclick="closeMobile()">Local e horários</a>
   <a href="#sobre" onclick="closeMobile()">Dra. Vanessa</a>
   <a href="#faq" onclick="closeMobile()">FAQ</a>
-  <a href="https://wa.me/5561985711936?text=Ol%C3%A1%2C+vim+pelo+site+e+gostaria+de+agendar+uma+avalia%C3%A7%C3%A3o." 
+  <a href="https://wa.me/5561985711936?text=Ol%C3%A1%2C+vim+pelo+site+e+gostaria+de+agendar+meu+mapeamento+f%C3%ADsico."
      class="btn-primary" style="width:100%;justify-content:center;" target="_blank" rel="noopener">
     Agendar pelo WhatsApp
   </a>
@@ -1206,7 +1356,7 @@ footer {
   <div class="hero-glow"></div>
   <div class="hero-inner">
     <!-- Content -->
-    <div>
+    <div class="hero-content">
       <div class="hero-eyebrow">
         <span class="hero-eyebrow-line"></span>
         <span>Fisioterapia · Recanto das Emas/DF</span>
@@ -1220,10 +1370,10 @@ footer {
         Atendimento individualizado com a Dra. Vanessa Daldegan, no Recanto das Emas. Consultas de segunda a sexta, das 8h às 18h, sempre com hora marcada.
       </p>
       <div class="hero-ctas">
-        <a href="https://wa.me/5561985711936?text=Ol%C3%A1%2C+vim+pelo+site+e+gostaria+de+agendar+minha+avalia%C3%A7%C3%A3o." 
+        <a href="https://wa.me/5561985711936?text=Ol%C3%A1%2C+vim+pelo+site+e+gostaria+de+agendar+meu+mapeamento+f%C3%ADsico."
            class="btn-primary" target="_blank" rel="noopener">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.107.546 4.09 1.502 5.813L0 24l6.341-1.484A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.032-1.38l-.361-.214-3.763.881.916-3.658-.235-.375A9.807 9.807 0 012.182 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
-          Quero agendar minha avaliação
+          Quero agendar meu mapeamento físico
         </a>
         <a href="#solucao" class="btn-ghost">Ver como funciona</a>
       </div>
@@ -1280,7 +1430,7 @@ footer {
 <section id="problema">
   <div class="problem-inner">
     <div class="reveal">
-      <div class="section-eyebrow">Avaliação fisioterapêutica</div>
+      <div class="section-eyebrow">Mapeamento físico</div>
       <h2 class="section-h2">
         Seu cuidado começa<br>com uma <em>escuta atenta</em>
       </h2>
@@ -1288,12 +1438,12 @@ footer {
         Cada pessoa chega com uma história, uma rotina e objetivos diferentes. Por isso, o primeiro encontro é dedicado a compreender suas queixas, limitações e necessidades funcionais.
       </p>
       <p class="body-text">
-        A avaliação orienta a escolha das técnicas e a construção de um plano fisioterapêutico individualizado. A indicação e a evolução dependem das condições de cada paciente.
+        O mapeamento físico orienta a escolha das técnicas e a construção de um plano fisioterapêutico individualizado. A indicação e a evolução dependem das condições de cada paciente.
       </p>
       <div class="pain-list">
         <div class="pain-item">
           <svg class="pain-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <span class="pain-text">Avaliação e acompanhamento de pessoas com dor crônica</span>
+          <span class="pain-text">Mapeamento físico e acompanhamento de pessoas com dor crônica</span>
         </div>
         <div class="pain-item">
           <svg class="pain-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -1329,7 +1479,7 @@ footer {
       Três frentes de<br><em style="color:var(--gold-light);">cuidado fisioterapêutico</em>
     </h2>
     <p class="body-text" style="color:rgba(245,240,232,0.65);margin:0;">
-      Após a avaliação, as condutas são selecionadas de acordo com a necessidade, a segurança e os objetivos de cada paciente.
+      Após o mapeamento físico, as condutas são selecionadas de acordo com a necessidade, a segurança e os objetivos de cada paciente.
     </p>
   </div>
   <div class="methods-grid">
@@ -1349,7 +1499,7 @@ footer {
       <div class="method-num">03</div>
       <svg class="method-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
       <div class="method-title">Reabilitação Metabólica e Dor Crônica</div>
-      <p class="method-text">Terapia Regenerativa Avançada (TRA), agulhamento distal e terapias integrativas avançadas, quando indicadas após avaliação.</p>
+      <p class="method-text">Terapia Regenerativa Avançada (TRA), agulhamento distal e terapias integrativas avançadas, quando indicadas após o mapeamento físico.</p>
     </div>
   </div>
 </section>
@@ -1362,7 +1512,7 @@ footer {
     <div class="indicacoes-header reveal">
       <div class="section-eyebrow" style="justify-content:center;">Local e horários</div>
       <h2 class="section-h2">Atendimento com hora marcada<br>no <em>Recanto das Emas</em></h2>
-      <p class="body-text">A localização geral é informada para ajudar no planejamento. O endereço completo e a orientação exata são enviados somente depois da confirmação do agendamento.</p>
+      <p class="body-text">O NeuroLume fica na Quadra 603, Conjunto 7, no Recanto das Emas/DF. Como os atendimentos são realizados somente com hora marcada, confirme o agendamento antes de se deslocar.</p>
     </div>
     <div class="conditions-grid">
       <div class="condition-card reveal" style="transition-delay:0.05s;"><span class="condition-dot"></span><span class="condition-name">Recanto das Emas, Distrito Federal</span></div>
@@ -1372,10 +1522,14 @@ footer {
       <div class="condition-card reveal" style="transition-delay:0.17s;"><span class="condition-dot"></span><span class="condition-name">Área residencial, sem estacionamento exclusivo</span></div>
       <div class="condition-card reveal" style="transition-delay:0.2s;"><span class="condition-dot"></span><span class="condition-name">É possível estacionar em frente ao portão</span></div>
     </div>
-    <div style="text-align:center;margin-top:52px;" class="reveal">
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin-top:52px;" class="reveal">
       <a href="https://wa.me/5561985711936?text=Ol%C3%A1%2C+gostaria+de+consultar+os+hor%C3%A1rios+dispon%C3%ADveis+no+Neurolume."
          class="btn-primary" target="_blank" rel="noopener">
         Consultar horários disponíveis
+      </a>
+      <a href="https://maps.app.goo.gl/tJ6nxwLZMhM4G8Je6?g_st=ac"
+         class="btn-ghost" style="color:var(--navy);border-color:var(--gold);" target="_blank" rel="noopener">
+        Ver como chegar
       </a>
     </div>
   </div>
@@ -1463,18 +1617,18 @@ footer {
       <div class="process-step reveal" style="transition-delay:0.15s;">
         <div class="step-num">2</div>
         <div class="step-title">Confirme o agendamento</div>
-        <p class="step-text">Depois da confirmação, você recebe o endereço completo e as orientações exatas de chegada.</p>
+        <p class="step-text">Depois da confirmação, você recebe as orientações de chegada e tem seu horário reservado.</p>
       </div>
       <div class="process-step reveal" style="transition-delay:0.25s;">
         <div class="step-num">3</div>
-        <div class="step-title">Faça sua avaliação</div>
-        <p class="step-text">No primeiro encontro, a Dra. Vanessa avalia suas necessidades e explica as possibilidades de cuidado para o seu caso.</p>
+        <div class="step-title">Faça seu mapeamento físico</div>
+        <p class="step-text">No primeiro encontro, a Dra. Vanessa mapeia as suas necessidades e explica as possibilidades de cuidado para o seu caso.</p>
       </div>
     </div>
     <div style="text-align:center;margin-top:60px;" class="reveal">
-      <a href="https://wa.me/5561985711936?text=Ol%C3%A1%2C+quero+agendar+minha+avalia%C3%A7%C3%A3o+no+Neurolume." 
+      <a href="https://wa.me/5561985711936?text=Ol%C3%A1%2C+quero+agendar+meu+mapeamento+f%C3%ADsico+no+Neurolume."
          class="btn-primary" target="_blank" rel="noopener">
-        Agendar minha avaliação agora
+        Agendar meu mapeamento físico agora
       </a>
     </div>
   </div>
@@ -1498,7 +1652,7 @@ footer {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
       </div>
-      <p class="testimonial-quote">"Passei 3 anos com dor na coluna que nenhum tratamento resolvia. Depois de 2 meses com a Dra. Vanessa, consegui voltar a trabalhar e dormir sem dor. A avaliação é completamente diferente — ela realmente ouve."</p>
+      <p class="testimonial-quote">"Passei 3 anos com dor na coluna que nenhum tratamento resolvia. Depois de 2 meses com a Dra. Vanessa, consegui voltar a trabalhar e dormir sem dor. O mapeamento físico é completamente diferente — ela realmente ouve."</p>
       <div class="testimonial-author">
         <div class="author-avatar">M</div>
         <div>
@@ -1560,7 +1714,7 @@ footer {
           Como funciona a primeira consulta?
           <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <div class="faq-answer"><p>O primeiro encontro é dedicado à avaliação fisioterapêutica. A Dra. Vanessa conversa sobre seu histórico, suas queixas, limitações e objetivos. A partir dessa avaliação, explica as possibilidades de cuidado e, quando indicado, propõe um plano individualizado.</p></div>
+        <div class="faq-answer"><p>O primeiro encontro é dedicado ao mapeamento físico. A Dra. Vanessa conversa sobre seu histórico, suas queixas, limitações e objetivos. A partir desse mapeamento, explica as possibilidades de cuidado e, quando indicado, propõe um plano individualizado.</p></div>
       </div>
 
       <div class="faq-item">
@@ -1568,7 +1722,7 @@ footer {
           Onde fica o NeuroLume?
           <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <div class="faq-answer"><p>O atendimento acontece no Recanto das Emas/DF, próximo ao Centro Olímpico e Paraolímpico. Como os atendimentos são realizados somente com hora marcada, o endereço completo e o ponto de referência exato são enviados após a confirmação do agendamento.</p></div>
+        <div class="faq-answer"><p>O atendimento acontece na Quadra 603, Conjunto 7, no Recanto das Emas/DF, próximo ao Centro Olímpico e Paraolímpico. Os atendimentos são realizados somente com hora marcada; confirme o agendamento antes de se deslocar.</p></div>
       </div>
 
       <div class="faq-item">
@@ -1584,7 +1738,40 @@ footer {
           Quais serviços são oferecidos?
           <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <div class="faq-answer"><p>O NeuroLume oferece terapias manuais; fisioterapia neurológica, cardiorrespiratória, ortopédica, pós-cirúrgica e para DTM; além de Terapia Regenerativa Avançada (TRA), agulhamento distal e terapias integrativas avançadas. A indicação depende da avaliação de cada pessoa.</p></div>
+        <div class="faq-answer">
+          <div class="faq-service-groups">
+            <div class="faq-service-group">
+              <h3>Terapias Manuais</h3>
+              <ul>
+                <li>Liberação Miofascial</li>
+                <li>Massagem Desportiva</li>
+                <li>Drenagem Linfática</li>
+                <li>Massagem Relaxante</li>
+                <li>Shiatsu</li>
+                <li>Reflexologia Manual e Podal</li>
+              </ul>
+            </div>
+            <div class="faq-service-group">
+              <h3>Reabilitação Motora Convencional</h3>
+              <ul>
+                <li>Fisioterapia Neurológica</li>
+                <li>Fisioterapia Cardiorrespiratória</li>
+                <li>Fisioterapia Ortopédica</li>
+                <li>Fisioterapia Pós-Cirúrgica</li>
+                <li>Fisioterapia para DTM</li>
+              </ul>
+            </div>
+            <div class="faq-service-group">
+              <h3>Reabilitação Metabólica e Tratamento da Dor Crônica</h3>
+              <ul>
+                <li>Terapia Regenerativa Avançada (TRA)</li>
+                <li>Agulhamento Distal</li>
+                <li>Terapias Integrativas Avançadas</li>
+              </ul>
+            </div>
+          </div>
+          <p class="faq-service-note">A indicação depende do mapeamento físico de cada pessoa.</p>
+        </div>
       </div>
 
       <div class="faq-item">
@@ -1608,6 +1795,36 @@ footer {
 </section>
 
 <!-- ══════════════════════════════════════════════════════════ -->
+<!-- MAPA                                                       -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section id="mapa">
+  <div class="map-inner">
+    <div class="map-copy reveal">
+      <div class="section-eyebrow">Como chegar</div>
+      <h2 class="section-h2">Encontre o NeuroLume<br>no <em>Recanto das Emas</em></h2>
+      <p class="body-text">O atendimento acontece em área residencial, próximo ao Centro Olímpico e Paraolímpico do Recanto das Emas. Consulte a rota antes de sair e lembre-se de que os atendimentos são realizados somente com hora marcada.</p>
+      <div class="map-details">
+        <div class="map-detail">Quadra 603, Conjunto 7, Recanto das Emas/DF</div>
+        <div class="map-detail">É possível estacionar em frente ao portão</div>
+        <div class="map-detail">Segunda a sexta-feira, das 8h às 18h</div>
+      </div>
+      <a href="https://maps.app.goo.gl/tJ6nxwLZMhM4G8Je6?g_st=ac" class="btn-primary" target="_blank" rel="noopener">
+        Abrir rota no Google Maps
+      </a>
+    </div>
+    <div class="map-frame reveal" style="transition-delay:0.15s;">
+      <iframe
+        title="Mapa para chegar ao NeuroLume no Recanto das Emas"
+        src="https://www.google.com/maps?q=Quadra+603,+Conjunto+7,+Recanto+das+Emas,+DF&amp;output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
 <!-- CTA FINAL                                                  -->
 <!-- ══════════════════════════════════════════════════════════ -->
 <section id="cta-final">
@@ -1621,13 +1838,13 @@ footer {
       <em>com informação e cuidado</em>
     </h2>
     <p class="cta-sub">
-      Converse com a Dra. Vanessa Daldegan para consultar os horários e entender como funciona a avaliação fisioterapêutica no NeuroLume.
+      Converse com nosso time para consultar os horários e entender como funciona o mapeamento físico no NeuroLume.
     </p>
     <div class="cta-buttons">
-      <a href="https://wa.me/5561985711936?text=Ol%C3%A1%2C+quero+agendar+minha+avalia%C3%A7%C3%A3o+no+Neurolume." 
+      <a href="https://wa.me/5561985711936?text=Ol%C3%A1%2C+quero+agendar+meu+mapeamento+f%C3%ADsico+no+Neurolume."
          class="btn-primary" target="_blank" rel="noopener">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.107.546 4.09 1.502 5.813L0 24l6.341-1.484A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.032-1.38l-.361-.214-3.763.881.916-3.658-.235-.375A9.807 9.807 0 012.182 12c0-5.42 4.398-9.818 9.818-9.818 5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
-        Agendar minha avaliação pelo WhatsApp
+        Agendar meu mapeamento físico pelo WhatsApp
       </a>
       <a href="https://www.instagram.com/dravanessadaldegan" class="btn-ghost" target="_blank" rel="noopener">
         Seguir no Instagram
@@ -1656,6 +1873,7 @@ footer {
         <a href="#sobre">Dra. Vanessa</a>
         <a href="#processo">Como Começar</a>
         <a href="#faq">FAQ</a>
+        <a href="#mapa">Como chegar</a>
       </div>
     </div>
     <div>
