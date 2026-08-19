@@ -8,9 +8,9 @@ Landing page estática do NeuroLume Instituto da Dor e Fisioterapia Regenerativa
 - `robots.txt`: libera mecanismos de busca e o `OAI-SearchBot`, usado pelo ChatGPT Search.
 - `sitemap.xml`: informa a URL canônica da página.
 
-## Privacidade da localização
+## Localização e agendamento
 
-O site deve exibir somente `Recanto das Emas/DF` e a referência geral ao Centro Olímpico e Paraolímpico. O endereço completo, o link exato do mapa e o ponto de referência exato não devem ser publicados: são enviados após a confirmação do agendamento.
+O site informa a região de atendimento e exibe o mapa aprovado da NeuroLume, com botão para abrir a rota no Google Maps. O atendimento é realizado somente com hora marcada; as orientações complementares de chegada são enviadas após a confirmação do agendamento.
 
 ## Conversões
 
